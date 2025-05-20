@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NotificationChannel;
+use App\Models\NotificationGroup;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
@@ -44,7 +46,10 @@ class NotificationController extends Controller
      */
     public function edit(): View
     {
-        return view('notifications.edit');
+        return view('notifications.edit', [
+            'notificationChannels' => NotificationChannel::get(),
+            'notificationGroups' => NotificationGroup::get(),
+        ]);
     }
 
     /**
