@@ -16,41 +16,41 @@
                             <div></div>
 
                             <div class="flex items-center">
-                                {{--Notification channels--}}
-                                <div class="w-24 flex items-center justify-center font-semibold text-gray-800">
-                                    Channel
-                                </div>
-                                {{--/Notification channels--}}
+                                @foreach($notificationChannels as $notificationChannel)
+                                    <div class="w-24 flex items-center justify-center font-semibold text-gray-800">
+                                        {{ $notificationChannel->title }}
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
 
-                        {{--Notification groups--}}
-                        <div class="border-b border-b-gray-100 last:border-b-0 pb-8">
-                            <div class="flex items-center justify-between">
-                                <div class="text-lg font-semibold text-gray-800">
-                                    Group
-                                </div>
-                            </div>
-
-                            <div class="space-y-1.5 mt-4">
-                                {{--Notifications--}}
+                        @foreach($notificationGroups as $notificationGroup)
+                            <div class="border-b border-b-gray-100 last:border-b-0 pb-8">
                                 <div class="flex items-center justify-between">
-                                    <div>
-                                        Notification title
-                                    </div>
-
-                                    <div class="flex items-center">
-                                        {{--Notification channel checkboxes--}}
-                                        <div class="w-24 flex items-center justify-center">
-                                            <input type="checkbox" class="rounded">
-                                        </div>
-                                        {{--/Notification channel checkboxes--}}
+                                    <div class="text-lg font-semibold text-gray-800">
+                                        {{ $notificationGroup->title }}
                                     </div>
                                 </div>
-                                {{--/Notifications--}}
+
+                                <div class="space-y-1.5 mt-4">
+                                    @foreach($notificationGroup->notifications as $notification)
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                {{ $notification->title }}
+                                            </div>
+
+                                            <div class="flex items-center">
+                                                @foreach($notificationChannels as $notificationChannel)
+                                                    <div class="w-24 flex items-center justify-center">
+                                                        <input type="checkbox" class="rounded">
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
-                        </div>
-                        {{--/Notification groups--}}
+                        @endforeach
                     </div>
 
                     <div class="flex items-center gap-4">
