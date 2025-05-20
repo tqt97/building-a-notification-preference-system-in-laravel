@@ -72,6 +72,17 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
+        $projects = NotificationGroup::firstOrCreate(['title' => 'Projects']);
+        $projects->notifications()->firstOrCreate(['type' => 'project_created', 'title' => 'A new project is created']);
+        $projects->notifications()->firstOrCreate(['type' => 'project_comment_created', 'title' => 'A comment is posted in a project']);
+        $projects->notifications()->firstOrCreate(['type' => 'project_mentioned', 'title' => 'I\'m mentioned in a project']);
+        $projects->notifications()->firstOrCreate(['type' => 'project_overdue', 'title' => 'A project is overdue']);
+
+        $files = NotificationGroup::firstOrCreate(['title' => 'Files']);
+        $files->notifications()->firstOrCreate(['type' => 'file_created', 'title' => 'A new file is uploaded']);
+        $files->notifications()->firstOrCreate(['type' => 'file_requires_approval', 'title' => 'A file requires my approval']);
+        $files->notifications()->firstOrCreate(['type' => 'file_deleted', 'title' => 'A file is deleted']);
+
         User::factory()->create([
             'name' => 'TuanTQ',
             'email' => 'admin@gmail.com',
