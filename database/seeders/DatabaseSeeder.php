@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         NotificationChannel::factory()->create(
             [
                 'title' => 'Email',
-                'type' => 'email',
+                'type' => 'mail',
             ],
         );
         NotificationChannel::factory()->create(

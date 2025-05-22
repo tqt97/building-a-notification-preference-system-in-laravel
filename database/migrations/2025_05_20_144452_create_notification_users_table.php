@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notification_users', function (Blueprint $table) {
+        Schema::create('notification_user', function (Blueprint $table) {
             $table->id();
             $table->foreignId('notification_id');
             $table->foreignId('user_id');
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notification_users');
+        Schema::dropIfExists('notification_user');
     }
 };
