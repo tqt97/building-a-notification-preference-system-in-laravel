@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\NotificationUpdateRequest;
 use App\Models\NotificationChannel;
 use App\Models\NotificationGroup;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class NotificationController extends Controller
@@ -55,9 +57,16 @@ class NotificationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(NotificationUpdateRequest $request): RedirectResponse
     {
-        //
+        $request->user()->notificationPreferences()->sync(
+            $request->collect('notifications')
+                ->mapWithKeys(fn ($channels, $notificationId) => [
+                    $notificationId => ['channels' => $channels],
+                ])
+        );
+
+        return back();
     }
 
     /**

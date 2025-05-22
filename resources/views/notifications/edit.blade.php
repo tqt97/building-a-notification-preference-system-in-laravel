@@ -42,7 +42,11 @@
                                             <div class="flex items-center">
                                                 @foreach($notificationChannels as $notificationChannel)
                                                     <div class="w-24 flex items-center justify-center">
-                                                        <input type="checkbox" class="rounded">
+                                                        <input type="checkbox" class="rounded"
+                                                            name="notifications[{{ $notification->id }}][]"
+                                                            value="{{ $notificationChannel->type }}"
+                                                            @checked(in_array($notificationChannel->type, auth()->user()->notificationPreferences->find($notification->id)?->pivot->channels ?? []))
+                                                        >
                                                     </div>
                                                 @endforeach
                                             </div>
